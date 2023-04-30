@@ -36,14 +36,19 @@ XMLHttpRequest.prototype.send = function () {
   });
   setTimeout(() => {
   const url = window.location.href;
-
   // Extract the search parameters from the URL
-  const searchParamsString = url.substring(url.indexOf("?") + 1);
+  let searchParamsString = '';
+  const queryStringIndex = url.indexOf('?');
+  if (queryStringIndex !== -1) {
+    searchParamsString = url.substring(queryStringIndex + 1);
+	}
   // Parse the search parameters and extract the values
+	
   const searchParams = new URLSearchParams(searchParamsString);
+	
   const text = searchParams.get("text");
-  const fontFamily = searchParams.get("fontFamily");
-  const fontSize = searchParams.get("fontSize");
+  const fontFamily = searchParams.get("fontFamily") ? searchParams.get("fontFamily"):'PingFangHK-Regular'
+  const fontSize = searchParams.get("fontSize") ? searchParams.get("fontSize") : '14px'
   // If the text parameter is present, decode it and insert it into the chat input field
 
   if (text) {
@@ -56,8 +61,6 @@ XMLHttpRequest.prototype.send = function () {
     }
   }
 
-  if (!fontFamily) fontFamily = "PingFangHK-Regular";
-  if (!fontSize) fontSize = "14px";
   // add font sytle
   var style = document.createElement("style");
   style.type = "text/css";
