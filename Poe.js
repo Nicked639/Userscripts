@@ -34,7 +34,7 @@ XMLHttpRequest.prototype.send = function () {
     element.style.setProperty("-webkit-user-select", "text", "important");
     element.style.setProperty("-webkit-touch-callout", "text", "important");
   });
-
+  setTimeout(() => {
   const url = window.location.href;
 
   // Extract the search parameters from the URL
@@ -68,5 +68,5 @@ XMLHttpRequest.prototype.send = function () {
     `* { font-family: ${fontFamily}, cursive; font-size: ${fontSize}; }`
   );
 
-  completion(true);
+  completion(true);},100)
 })();
