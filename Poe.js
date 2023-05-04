@@ -7,7 +7,7 @@
 // @version            20230501
 // @license            DoWhatYouWant
 // @namespace
-// @include            poe\.*
+// @include            /^https?://poe\.com\/.*$/
 // @grant              none
 // @inject-into        content
 // @run-at             document-start
