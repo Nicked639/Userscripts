@@ -43,19 +43,7 @@
   const fontFamily = searchParams.get("fontFamily") ? searchParams.get("fontFamily"):'PingFangHK-Regular'
   const fontSize = searchParams.get("fontSize") ? searchParams.get("fontSize") : '14px'
   // If the text parameter is present, decode it and insert it into the chat input field
-
-  if (text) {
-    const decodedText = decodeURIComponent(text);
-    const chatInput = document.querySelector(
-      ".ChatMessageInputView_textInput__Aervw"
-    );
-    if (chatInput) {
-      chatInput.value += decodedText;
-			
-    }
-  }
-
-  // add font sytle
+    // add font sytle
   var style = document.createElement("style");
   style.type = "text/css";
   var head = document.head;
@@ -63,14 +51,17 @@
   // change font here
   style.sheet.insertRule(
     `* { font-family: ${fontFamily}, cursive; font-size: ${fontSize}; }`
-  );
-	setTimeout(()=>{
-		// Click the send button
-      const sendButton = document.querySelector('.ChatMessageInputView_sendButton__reEpT');
-      if (sendButton) {
-           sendButton.click();
-					
-					}
-	}, 500)
+		);
+
+  if (text) {
+		( async() => {
+document.querySelector('textarea').value = text;
+document.querySelector('textarea').dispatchEvent(new Event('input'));
+document.querySelector('textarea').dispatchEvent(new Event('change'));
+await new Promise(r => setTimeout(r, 1000));
+document.querySelector('.ChatMessageInputContainer_sendButton__s7XkP').click();
+})();
+  }
+	
   completion(true);
 })();
